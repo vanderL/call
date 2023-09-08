@@ -16,12 +16,11 @@ export default function Home() {
         </Text>
 
         <ClaimUsernameForm />
-
       </Hero>
       <Preview>
         <Image
           src={previewImage}
-          alt='Calendário simbolizando aplicação em funcionamento'
+          alt="Calendário simbolizando aplicação em funcionamento"
           height={400}
           quality={100}
           priority
@@ -30,4 +29,3 @@ export default function Home() {
     </Container>
   )
 }
-
