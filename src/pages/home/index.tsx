@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Container, Hero, Preview } from './styles'
 
 import previewImage from '../../assets/app-preview.png'
+import { ClaimUsernameForm } from './components/ClaimUsernameForm'
 
 export default function Home() {
   return (
@@ -13,11 +14,13 @@ export default function Home() {
           Conecte seu calendário e permita que as pessoas marquem agendamentos
           no seu tempo livre.
         </Text>
+
+        <ClaimUsernameForm />
       </Hero>
       <Preview>
         <Image
           src={previewImage}
-          alt='Calendário simbolizando aplicação em funcionamento'
+          alt="Calendário simbolizando aplicação em funcionamento"
           height={400}
           quality={100}
           priority
@@ -26,4 +29,3 @@ export default function Home() {
     </Container>
   )
 }
-
