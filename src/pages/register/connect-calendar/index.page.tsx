@@ -34,8 +34,6 @@ export default function Register() {
           </Button>
         </ConnectItem>
 
-        <pre>{JSON.stringify(session.data)}</pre>
-
         <Button>
           Próximo passo
           <ArrowRight />
