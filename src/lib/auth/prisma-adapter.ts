@@ -118,14 +118,49 @@ export function PrismaAdapter(): Adapter {
       }
     },
 
-    async getSessionAndUser(sessionToken) {},
+    async getSessionAndUser(sessionToken) {
+      const { user, ...session } = await prisma.session.findUniqueOrThrow({
+        where: {
+          session_token: sessionToken,
+        },
+        include: {
+          user: true,
+        },
+      })
 
-    async updateSession({ sessionToken }) {},
+      return {
+        session: {
+          expires: session.expires,
+          sessionToken: session.session_token,
+          userId: session.user_id,
+        },
+        user: {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email!,
+          avatar_url: user.avatar_url!,
+          emailVerified: null,
+        },
+      }
+    },
 
-    async deleteSession(sessionToken) {},
+    async updateSession({ sessionToken, userId, expires }) {
+      const prismaSession = await prisma.session.update({
+        where: {
+          session_token: sessionToken,
+        },
+        data: {
+          expires,
+          user_id: userId,
+        },
+      })
 
-    async createVerificationToken({ identifier, expires, token }) {},
-
-    async useVerificationToken({ identifier, token }) {},
+      return {
+        sessionToken: prismaSession.session_token,
+        userId: prismaSession.user_id,
+        expires: prismaSession.expires,
+      }
+    },
   }
 }
